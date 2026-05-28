@@ -1,3 +1,6 @@
+This fork is for Lishui LSW-YG98-F / LSW1136-113F with Bafang BFSWX02 36V250W (12) 
+__________________________________________________________________________________
+
 This project has reached a certain maturity, use is always at your own risk. The authors do not accept any liability for damage to property or personal injury!  
 
 The [master]([https://github.com/ShalokShalom/EBiCS_Firmware/wiki](https://github.com/EBiCS/EBiCS_Firmware/tree/master) branch supports sensored motors, Bafang-, Kunteng- Kingmeter-Displays, and debugging.
