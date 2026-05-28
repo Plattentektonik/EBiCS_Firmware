@@ -838,7 +838,7 @@ int main(void)
 			else if(MS.Voltage<VOLTAGE_MIN)int32_temp_current_target=0;
 			//next priority: push assist
 #if (DISPLAY_TYPE == DISPLAY_TYPE_KUNTENG)
-			else if(ui8_Walk_Assist_flag){int32_temp_current_target=(PUSHASSIST_CURRENT);} //Now working for Kunteng protocol.
+			else if(ui8_Push_Assist_flag){int32_temp_current_target=(PUSHASSIST_CURRENT);} //Now working for Kunteng protocol.
 #else
 			else if(ui8_Push_Assist_flag)int32_temp_current_target=(MS.assist_level*PUSHASSIST_CURRENT)>>8; //does not work for BAFANG
 #endif
@@ -981,7 +981,7 @@ int main(void)
 					int32_temp_current_target=map(uint32_SPEEDx100_cumulated>>SPEEDFILTER, MP.speedLimit*100,(MP.speedLimit+2)*100,int32_temp_current_target,0);
 				}
 				else{ //limit to 6km/h if pedals are not turning
-					int32_temp_current_target=map(uint32_SPEEDx100_cumulated>>SPEEDFILTER, 500,700,int32_temp_current_target,0);
+					int32_temp_current_target=map(uint32_SPEEDx100_cumulated>>SPEEDFILTER, 2500,2700,int32_temp_current_target,0);
 				}
 			}
 			//			else int32_temp_current_target=int32_temp_current_target;
@@ -1080,7 +1080,7 @@ int main(void)
 #endif
 				//check if rotor is turning
 
-				if((uint16_full_rotation_counter>7999||uint16_half_rotation_counter>7999)){
+				if((uint16_full_rotation_counter>49999||uint16_half_rotation_counter>49999)){
 					SystemState = Stop;
 					//HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 					if(READ_BIT(TIM1->BDTR, TIM_BDTR_MOE)){
@@ -1715,8 +1715,8 @@ int main(void)
 				if(HAL_GPIO_ReadPin(PAS_GPIO_Port, PAS_Pin))uint32_PAS_HIGH_counter++;
 			}
 			if (uint32_SPEED_counter<128000)uint32_SPEED_counter++;					//counter for external Speedsensor
-			if(uint16_full_rotation_counter<8000)uint16_full_rotation_counter++;	//full rotation counter for motor standstill detection
-			if(uint16_half_rotation_counter<8000)uint16_half_rotation_counter++;	//half rotation counter for motor standstill detection
+			if(uint16_full_rotation_counter<50000)uint16_full_rotation_counter++;	//full rotation counter for motor standstill detection
+			if(uint16_half_rotation_counter<50000)uint16_half_rotation_counter++;	//half rotation counter for motor standstill detection
 
 		}
 		//HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
